@@ -58,4 +58,8 @@ public class Contact {
     public int getPhone() {
         return phone;
     }
+    public String toString(){
+        return "Contact : Name:"+firstname +" "+ lastname +" Address: " +address+" City:"+ city+ " phone:"+ phone;
+    }
+
 }

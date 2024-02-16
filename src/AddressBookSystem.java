@@ -1,5 +1,8 @@
+import java.util.Objects;
 import java.util.Scanner;
 public class AddressBookSystem {
+    static Contact contacts[]= new Contact[100];
+    static int count=0;
     public static Contact addcontact(){
         Scanner sc = new Scanner(System.in);
         Contact contact = new Contact();
@@ -15,10 +18,37 @@ public class AddressBookSystem {
         contact.setPhone(sc.nextInt());
         return contact;
     }
+    public static void editcontact(String firstname){
+        Scanner sc = new Scanner(System.in);
+        for(int i=0;i<count;i++){
+            if(Objects.equals(contacts[i].getFirstname(), firstname)){
+                System.out.println("Enter new first name: ");
+                contacts[i].setFirstname(sc.next());
+                System.out.println("Enter new lastname: ");
+                contacts[i].setLastname(sc.next());
+                System.out.println("Enter new address: ");
+                contacts[i].setAddress(sc.next());
+                System.out.println("Enter new city: ");
+                contacts[i].setCity(sc.next());
+                System.out.println("Enter new phone: ");
+                contacts[i].setCity(sc.next());
+                System.out.println("Contact updated successfully.");
+                return;
+            }
+        }
+
+        System.out.println("Contact not found.");
+    }
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         System.out.println("Welcome to Address Book");
-        Contact contact = addcontact();
-        System.out.println(contact);
+        contacts[count++] = addcontact();
+        System.out.println("enter name you want to edit: ");
+        String editname= sc.next();
+        editcontact(editname);
+        System.out.println("All cantacts:");
+        for (int i=0; i<count;i++){
+            System.out.println(contacts[i]);
+        }
     }
 }

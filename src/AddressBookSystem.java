@@ -39,6 +39,23 @@ public class AddressBookSystem {
 
         System.out.println("Contact not found.");
     }
+    public static void deletecontact(String firstname){
+        boolean found =false;
+        for(int i=0; i<count;i++){
+            if(contacts[i].getFirstname()==firstname){
+                for(int j=i; j<count-1; j++){
+                    contacts[j] = contacts[j+1];
+                }
+                count--;
+                System.out.println("Contact deleted successfully.");
+                found=true;
+                break;
+            }
+        }
+        if(!found){
+            System.out.println("Contact not found.");
+        }
+    }
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         System.out.println("Welcome to Address Book");
@@ -50,5 +67,8 @@ public class AddressBookSystem {
         for (int i=0; i<count;i++){
             System.out.println(contacts[i]);
         }
+        System.out.println("Enter name you want to delete: ");
+        String deletename= sc.next();
+        deletecontact(deletename);
     }
 }

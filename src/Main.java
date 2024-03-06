@@ -11,7 +11,8 @@ public class Main {
             System.out.println("2. Select Address Book");
             System.out.println("3. Remove Address Book");
             System.out.println("4. Display all Address Book");
-            System.out.println("5. Exit");
+            System.out.println("5. Search Person in city or state across Address Book");
+            System.out.println("6. Exit");
             System.out.print("Enter your choice: ");
             int choice = scanner.nextInt();
             scanner.nextLine(); // Consume newline
@@ -41,6 +42,10 @@ public class Main {
                     bookManagement.displayBook();
                     break;
                 case 5:
+//                    bookManagement.searchPersonInCityOrState()
+                    searchPersonInCityOrState(bookManagement);
+                    break;
+                case 6:
                     System.out.println("Exiting...");
                     scanner.close();
                     System.exit(0);
@@ -92,6 +97,25 @@ public class Main {
                     return;
                 default:
                     System.out.println("Invalid choice. Please enter a number between 1 and 5.");
+            }
+        }
+    }
+
+    public static void searchPersonInCityOrState(AddressBookManagement bookManagement) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter name to search: ");
+        String name = scanner.nextLine();
+        System.out.print("Enter city to search: ");
+        String city = scanner.nextLine();
+
+        List<Contact> matchingContacts = bookManagement.searchPersonInCityOrState(name, city);
+
+        if (matchingContacts.isEmpty()) {
+            System.out.println("No matching contacts found.");
+        } else {
+            System.out.println("Matching contacts:");
+            for (Contact contact : matchingContacts) {
+                System.out.println(contact);
             }
         }
     }

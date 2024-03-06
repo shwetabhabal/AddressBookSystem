@@ -62,4 +62,7 @@ public class Contact {
         return "Contact : Name:"+firstname +" "+ lastname +" Address: " +address+" City:"+ city+ " phone:"+ phone;
     }
 
+    public String getName() {
+        return firstname + " " + lastname;
+    }
 }

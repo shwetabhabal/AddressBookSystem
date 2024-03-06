@@ -1,6 +1,4 @@
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 class AddressBook {
     private Map<String, Contact> contacts;
@@ -63,4 +61,9 @@ class AddressBook {
             System.out.println("Contact not found.");
         }
     }
+    public List<Contact> getContacts() {
+        return new ArrayList<>(contacts.values());
+    }
+
+
 }

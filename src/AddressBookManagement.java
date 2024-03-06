@@ -1,8 +1,19 @@
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 class AddressBookManagement {
     private Map<String, AddressBook> addressBooks;
+
+    public List<Contact> searchPersonInCityOrState(String name, String city) {
+        return addressBooks.values().stream()
+                .flatMap(addressBook -> addressBook.getContacts().stream())
+                .filter(contact -> contact.getName().equalsIgnoreCase(name)
+                        && contact.getCity().equalsIgnoreCase(city))
+                .collect(Collectors.toList());
+    }
 
     public AddressBookManagement() {
         addressBooks = new HashMap<>();

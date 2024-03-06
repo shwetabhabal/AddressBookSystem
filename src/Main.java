@@ -1,4 +1,5 @@
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) {
@@ -11,8 +12,9 @@ public class Main {
             System.out.println("2. Select Address Book");
             System.out.println("3. Remove Address Book");
             System.out.println("4. Display all Address Book");
-            System.out.println("5. Search Person in city or state across Address Book");
-            System.out.println("6. Exit");
+            System.out.println("5. Search Person in city across Address Book");
+            System.out.println("6. View Persons by City");
+            System.out.println("7. Exit");
             System.out.print("Enter your choice: ");
             int choice = scanner.nextInt();
             scanner.nextLine(); // Consume newline
@@ -42,10 +44,12 @@ public class Main {
                     bookManagement.displayBook();
                     break;
                 case 5:
-//                    bookManagement.searchPersonInCityOrState()
                     searchPersonInCityOrState(bookManagement);
                     break;
                 case 6:
+                    viewPersonsByCity(bookManagement);
+                    break;
+                case 7:
                     System.out.println("Exiting...");
                     scanner.close();
                     System.exit(0);
@@ -117,6 +121,27 @@ public class Main {
             for (Contact contact : matchingContacts) {
                 System.out.println(contact);
             }
+        }
+    }
+
+    public static void viewPersonsByCity(AddressBookManagement bookManagement) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter city to view persons: ");
+        String city = scanner.nextLine();
+
+        // Retrieve all contacts from all address books
+        List<Contact> allContacts = bookManagement.getAllContacts();
+
+        // Use streams to filter contacts by city
+        List<Contact> contactsInCity = allContacts.stream()
+                .filter(contact -> contact.getCity().equalsIgnoreCase(city))
+                .collect(Collectors.toList());
+
+        if (contactsInCity.isEmpty()) {
+            System.out.println("No persons found in " + city + ".");
+        } else {
+            System.out.println("Persons in " + city + ":");
+            contactsInCity.forEach(contact -> System.out.println(contact.getFirstname() + " " + contact.getLastname()));
         }
     }
 }

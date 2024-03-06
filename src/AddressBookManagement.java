@@ -7,6 +7,14 @@ import java.util.stream.Collectors;
 class AddressBookManagement {
     private Map<String, AddressBook> addressBooks;
 
+    public List<Contact> getAllContacts() {
+        List<Contact> allContacts = new ArrayList<>();
+        for (AddressBook addressBook : addressBooks.values()) {
+            allContacts.addAll(addressBook.getContacts());
+        }
+        return allContacts;
+    }
+
     public List<Contact> searchPersonInCityOrState(String name, String city) {
         return addressBooks.values().stream()
                 .flatMap(addressBook -> addressBook.getContacts().stream())

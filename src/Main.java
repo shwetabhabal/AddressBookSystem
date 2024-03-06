@@ -14,7 +14,8 @@ public class Main {
             System.out.println("4. Display all Address Book");
             System.out.println("5. Search Person in city across Address Book");
             System.out.println("6. View Persons by City");
-            System.out.println("7. Exit");
+            System.out.println("7. Count Contacts by City");
+            System.out.println("8. Exit");
             System.out.print("Enter your choice: ");
             int choice = scanner.nextInt();
             scanner.nextLine(); // Consume newline
@@ -50,6 +51,13 @@ public class Main {
                     viewPersonsByCity(bookManagement);
                     break;
                 case 7:
+                    Map<String, Integer> contactCountByCity = countContactsByCity();
+                    System.out.println("Number of contacts by city:");
+                    for (Map.Entry<String, Integer> entry : contactCountByCity.entrySet()) {
+                        System.out.println(entry.getKey() + ": " + entry.getValue());
+                    }
+                    break;
+                case 8:
                     System.out.println("Exiting...");
                     scanner.close();
                     System.exit(0);
@@ -144,4 +152,23 @@ public class Main {
             contactsInCity.forEach(contact -> System.out.println(contact.getFirstname() + " " + contact.getLastname()));
         }
     }
+    public static List<Contact> getAllContacts() {
+        List<Contact> allContacts = new ArrayList<>();
+        for (AddressBook addressBook : AddressBookManagement.addressBooks.values()) {
+            allContacts.addAll(addressBook.getContacts());
+        }
+        return allContacts;
+    }
+    public static Map<String, Integer> countContactsByCity() {
+        Map<String, Integer> contactCountByCity = new HashMap<>();
+        List<Contact> allContacts =  getAllContacts();
+
+        for (Contact contact : allContacts) {
+            String city = contact.getCity();
+            contactCountByCity.put(city, contactCountByCity.getOrDefault(city, 0) + 1);
+        }
+
+        return contactCountByCity;
+    }
+
 }

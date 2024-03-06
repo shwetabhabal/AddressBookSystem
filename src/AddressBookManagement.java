@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 class AddressBookManagement {
-    private Map<String, AddressBook> addressBooks;
+    public static Map<String, AddressBook> addressBooks;
 
     public List<Contact> getAllContacts() {
         List<Contact> allContacts = new ArrayList<>();

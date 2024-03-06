@@ -32,13 +32,31 @@ class AddressBookManagement {
         return addressBooks.get(name);
     }
 
+//    public void displayBook() {
+//        List<String> sortedNames = new ArrayList<>(addressBooks.keySet());
+//        Collections.sort(sortedNames);
+//
+//        System.out.println("Address Books in Alphabetical Order:");
+//        for (String name : sortedNames) {
+//            System.out.println(name);
+//        }
+//    }
+    //sort by city
     public void displayBook() {
-        List<String> sortedNames = new ArrayList<>(addressBooks.keySet());
-        Collections.sort(sortedNames);
+        if (addressBooks.isEmpty()) {
+            System.out.println("No address books available.");
+            return;
+        }
 
-        System.out.println("Address Books in Alphabetical Order:");
-        for (String name : sortedNames) {
-            System.out.println(name);
+        System.out.println("Address Books sorted by city:");
+
+        for (Map.Entry<String, AddressBook> entry : addressBooks.entrySet()) {
+            String addressBookName = entry.getKey();
+            AddressBook addressBook = entry.getValue();
+
+            System.out.println("Address Book: " + addressBookName);
+
+
         }
     }
     public void removeAddressBook(String name) {

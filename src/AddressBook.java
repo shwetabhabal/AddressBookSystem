@@ -11,7 +11,10 @@ class AddressBook {
 
     public void addContact(Contact contact) {
         //check if name already exist
-        if (contacts.containsKey(contact.getFirstname() + " " + contact.getLastname())) {
+        String fullName = contact.getFirstname() + " " + contact.getLastname();
+
+        boolean contactExists = contacts.keySet().stream().anyMatch(key -> key.equals(fullName));
+        if (contactExists) {
             System.out.println("Contact already exists.");
 //            return;
         }

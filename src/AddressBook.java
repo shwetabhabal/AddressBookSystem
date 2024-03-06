@@ -10,8 +10,15 @@ class AddressBook {
     }
 
     public void addContact(Contact contact) {
+        //check if name already exist
+        if (contacts.containsKey(contact.getFirstname() + " " + contact.getLastname())) {
+            System.out.println("Contact already exists.");
+//            return;
+        }
+        else {
         contacts.put(contact.getFirstname(), contact);
         System.out.println("Contact added successfully.");
+        }
     }
 
     public void displayContacts() {
@@ -25,20 +32,6 @@ class AddressBook {
             System.out.println();
         }
     }
-
-//    public void searchContact(String name) {
-//        Contact contact = contacts.get(name);
-//        if (contact != null) {
-//            System.out.println("Contact found:");
-//            System.out.println("First Name: " + contact.getFirstname());
-//            System.out.println("Last Name: " + contact.getLastname());
-//            System.out.println("Address: "+contact.getAddress());
-//            System.out.println("City: "+contact.getCity());
-//            System.out.println("Phone: " + contact.getPhone());
-//        } else {
-//            System.out.println("Contact not found.");
-//        }
-//    }
 
     public void editContact(String name){
         Scanner sc = new Scanner(System.in);
@@ -58,7 +51,6 @@ class AddressBook {
         cont.setAddress(sc.nextLine());
         System.out.println("Enter new phone");
         cont.setPhone(sc.nextInt());
-
     }
 
     public void deleteContact(String name) {
